@@ -1,5 +1,5 @@
 # Node-React-Basic
 <br />
-- React.js
-- Node.js(express)
-- MongoDB
+- React.js <br />
+- Node.js(express) <br />
+- MongoDB 
