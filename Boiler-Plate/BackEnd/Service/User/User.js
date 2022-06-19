@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import Bcrypt from '../../../Util/Bcrypt.js';
 
 const userSchema = mongoose.Schema({
-  id: {
+  userId: {
     type: String,
     trim: true,
     unique: 1,
@@ -35,6 +36,18 @@ const userSchema = mongoose.Schema({
   tokenExp: {
     type: Number,
   },
+});
+
+userSchema.pre('save', function (next) {
+  const user = this;
+  // 비밀번호 암호화
+  if (user.isModified('password')) {
+    const bcrypt = new Bcrypt(10);
+    bcrypt.encoder(user.password, next, (hash) => {
+      user.password = hash;
+      next();
+    });
+  }
 });
 
 const User = mongoose.model('User', userSchema);
