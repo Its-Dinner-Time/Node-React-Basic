@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import Bcrypt from '../../../Util/Bcrypt.js';
 
+const bcrypt = new Bcrypt(10); // 암호화
+
+// schema 정의
 const userSchema = mongoose.Schema({
   userId: {
     type: String,
@@ -38,16 +41,31 @@ const userSchema = mongoose.Schema({
   },
 });
 
+userSchema.methods.comparePassword = function (reqPassword, callback) {
+  const { instance } = bcrypt;
+  instance.compare(reqPassword, this.password, (err, info) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+
+    callback(null, info);
+  });
+};
+
 userSchema.pre('save', function (next) {
   const user = this;
   // 비밀번호 암호화
   if (user.isModified('password')) {
-    const bcrypt = new Bcrypt(10);
     bcrypt.encoder(user.password, next, (hash) => {
       user.password = hash;
       next();
     });
+
+    return;
   }
+
+  next();
 });
 
 const User = mongoose.model('User', userSchema);

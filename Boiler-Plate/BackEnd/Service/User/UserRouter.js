@@ -3,6 +3,7 @@ import UserResponse from './UserResponse.js';
 
 const USER = '/user';
 const USER_ALL = `${USER}/all`;
+const USER_LOGIN = '/login';
 
 export default function router(app) {
   const request = new UserRequest(app);
@@ -20,5 +21,10 @@ export default function router(app) {
   // User Register
   app.post(USER, (req, res) => {
     request.register(req, res);
+  });
+
+  // User login
+  app.post(USER_LOGIN, (req, res) => {
+    response.login(req, res);
   });
 }

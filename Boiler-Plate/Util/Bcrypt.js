@@ -3,6 +3,10 @@ import bcrypt from 'bcrypt';
 export default class BCryptPasswordEncoder {
   #_saltRounds;
 
+  get instance() {
+    return bcrypt;
+  }
+
   constructor(rounds) {
     this.#_saltRounds = rounds;
   }

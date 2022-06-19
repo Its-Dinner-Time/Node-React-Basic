@@ -1,13 +1,5 @@
 import { User } from './User.js';
-
-const FAIL = 'fail';
-function fail(err) {
-  return { success: FAIL, err };
-}
-
-function success() {
-  return { success: true };
-}
+import { fail, success } from '../../../Util/Utils.js';
 
 export default class UserRequest {
   #_user = User;
