@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import Bcrypt from '../../../Util/Bcrypt.js';
+import JWT from '../../../Util/JWT.js';
 
 const bcrypt = new Bcrypt(10); // 암호화
 
@@ -50,6 +51,17 @@ userSchema.methods.comparePassword = function (reqPassword, callback) {
     }
 
     callback(null, info);
+  });
+};
+
+userSchema.methods.generateToken = function (callback) {
+  const user = this;
+  const jwt = new JWT();
+
+  user.token = jwt.sign(user._id.toHexString());
+  user.save((err, info) => {
+    if (err) return callback(err);
+    return callback(null, info);
   });
 };
 

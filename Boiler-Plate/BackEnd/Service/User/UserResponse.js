@@ -35,13 +35,22 @@ export default class UserResponse {
     const { userId, password } = req.body;
     const user = this.#_user;
 
-    user.findOne({ userId }, (err, info) => {
-      if (this.#_errorResolve(res, err, info, this.#_noUserError()) !== true) return;
+    user.findOne({ userId }, (err, loginUser) => {
+      if (this.#_errorResolve(res, err, loginUser, this.#_noUserError()) !== true) return;
 
-      info.comparePassword(password, (err, info) => {
+      loginUser.comparePassword(password, (err, info) => {
         if (this.#_errorResolve(res, err, info, this.#_passwordNotMatchError()) !== true) return;
 
-        res.json(this.#_loginSuccess);
+        loginUser.generateToken((err, info) => {
+          if (err) return res.status(400).send(err);
+
+          // token 저장
+          const { token, _id } = info;
+          res
+            .cookie('basic-auth', token)
+            .status(200)
+            .json({ ...this.#_loginSuccess, id: _id });
+        });
       });
     });
   }
