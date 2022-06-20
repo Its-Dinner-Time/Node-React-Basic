@@ -3,7 +3,15 @@ import React from 'react';
 function Footer() {
   return (
     <>
-      <div>Footer</div>
+      <div
+        className="
+        absolute 
+        bottom-0 
+        left-0
+        "
+      >
+        Footer
+      </div>
     </>
   );
 }

@@ -1,15 +1,9 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 function LandingPage() {
-  useEffect(() => {
-    fn();
-    async function fn() {
-      const fetched = await axios.get('/api');
-      console.log(fetched);
-    }
-  }, []);
-
+  const user = useSelector((state) => state.user.info); // store에 저장한 값 가져오기
+  console.log(user);
   return (
     <>
       <div>LandingPage</div>

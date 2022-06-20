@@ -7,22 +7,33 @@ import LandingPage from './components/views/LandingPage/LandingPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Footer from './components/views/Footer/Footer';
 
-function App() {
+export default function App() {
   return (
     <>
-      <Router>
-        <Navbar />
+      <div
+        className="
+          flex
+          flex-col
+          bg-slate-200 
+          w-screen 
+          h-screen 
+          relative
+        "
+      >
+        <Router>
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-        </Routes>
+          <div className="grow flex justify-center items-center">
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Routes>
+          </div>
 
-        <Footer />
-      </Router>
+          <Footer />
+        </Router>
+      </div>
     </>
   );
 }
-
-export default App;
