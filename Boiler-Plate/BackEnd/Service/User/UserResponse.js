@@ -47,11 +47,20 @@ export default class UserResponse {
           // token 저장
           const { token, _id } = info;
           res
-            .cookie('basic-auth', token)
+            .cookie('basic_auth', token)
             .status(200)
             .json({ ...this.#_loginSuccess, id: _id });
         });
       });
+    });
+  }
+
+  auth(req, res) {
+    const { user } = req;
+    res.status(200).json({
+      ...user.getInfo(),
+      isAdmin: user.role !== 0,
+      authenticated: true,
     });
   }
 }

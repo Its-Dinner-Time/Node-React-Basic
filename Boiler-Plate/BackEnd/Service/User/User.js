@@ -56,11 +56,29 @@ userSchema.methods.comparePassword = function (reqPassword, callback) {
 
 userSchema.methods.generateToken = function (callback) {
   const user = this;
-  const jwt = new JWT();
 
-  user.token = jwt.sign(user._id.toHexString());
+  user.token = JWT.sign(user._id.toHexString());
   user.save((err, info) => {
     if (err) return callback(err);
+    return callback(null, info);
+  });
+};
+
+userSchema.methods.getInfo = function () {
+  const { userId, name, lastname, age, role } = this;
+  return {
+    userId,
+    name,
+    lastname,
+    age,
+    role,
+  };
+};
+
+userSchema.statics.findByToken = function (decoded, callback) {
+  const user = this;
+  user.findOne({ _id: decoded }, (err, info) => {
+    if (!info) return callback(err);
     return callback(null, info);
   });
 };
