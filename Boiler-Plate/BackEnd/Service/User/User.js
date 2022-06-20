@@ -65,19 +65,21 @@ userSchema.methods.generateToken = function (callback) {
 };
 
 userSchema.methods.getInfo = function () {
-  const { userId, name, lastname, age, role } = this;
+  const { _id, userId, name, lastname, age, role, image } = this;
   return {
+    _id,
     userId,
     name,
     lastname,
     age,
     role,
+    image,
   };
 };
 
-userSchema.statics.findByToken = function (decoded, callback) {
+userSchema.statics.findByToken = function ({ token, decoded }, callback) {
   const user = this;
-  user.findOne({ _id: decoded }, (err, info) => {
+  user.findOne({ _id: decoded, token }, (err, info) => {
     if (!info) return callback(err);
     return callback(null, info);
   });

@@ -57,10 +57,25 @@ export default class UserResponse {
 
   auth(req, res) {
     const { user } = req;
+    if (!user) return res.json(fail({ err: 'no user' }));
+
     res.status(200).json({
       ...user.getInfo(),
       isAdmin: user.role !== 0,
       authenticated: true,
     });
+  }
+
+  logout(req, res) {
+    const user = this.#_user;
+
+    user.findByIdAndUpdate(
+      { _id: req.user?._id }, //
+      { token: '' },
+      (err, info) => {
+        if (err) return res.status(400).json(err);
+        return res.status(200).json(success());
+      }
+    );
   }
 }

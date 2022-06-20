@@ -26,7 +26,7 @@ export default function auth(req, res, next) {
   }
 
   // token으로 유저 조회(액션)
-  User.findByToken(decoded, (err, info) => {
+  User.findByToken({ token, decoded }, (err, info) => {
     req.token = decoded;
     req.user = info;
     next();

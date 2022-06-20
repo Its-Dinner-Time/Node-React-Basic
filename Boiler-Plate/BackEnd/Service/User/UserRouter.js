@@ -6,6 +6,7 @@ import Auth from '../../Middleware/auth.js';
 const USER = '/user';
 const USER_LOGIN = `${USER}/login`;
 const USER_AUTH = `${USER}/auth`;
+const USER_LOGOUT = `${USER}/logout`;
 
 export default function router(app) {
   const request = new UserRequest(app);
@@ -24,5 +25,10 @@ export default function router(app) {
   // User Auth
   app.get(USER_AUTH, Auth, (req, res) => {
     response.auth(req, res);
+  });
+
+  // User Logout
+  app.get(USER_LOGOUT, Auth, (req, res) => {
+    response.logout(req, res);
   });
 }
