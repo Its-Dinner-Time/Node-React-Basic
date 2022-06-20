@@ -3,12 +3,12 @@ import UserResponse from './UserResponse.js';
 
 import Auth from '../../Middleware/auth.js';
 
-const USER = '/user';
-const USER_LOGIN = `${USER}/login`;
-const USER_AUTH = `${USER}/auth`;
-const USER_LOGOUT = `${USER}/logout`;
+export default function (root, app) {
+  const USER = `${root}/user`;
+  const USER_LOGIN = `${USER}/login`;
+  const USER_AUTH = `${USER}/auth`;
+  const USER_LOGOUT = `${USER}/logout`;
 
-export default function router(app) {
   const request = new UserRequest(app);
   const response = new UserResponse(app);
 

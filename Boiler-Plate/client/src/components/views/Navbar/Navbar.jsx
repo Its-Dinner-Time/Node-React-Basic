@@ -8,7 +8,9 @@ function Navbar() {
         <nav>
           <ul>
             <li>
-              <Link to="/">HOME</Link>
+              <Link to="/" className="text-3xl font-bold underline">
+                HOME
+              </Link>
             </li>
             <li>
               <Link to="/login">Sign in</Link>
