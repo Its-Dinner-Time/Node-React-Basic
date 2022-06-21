@@ -9,6 +9,7 @@ export default class UserRequest {
   }
 
   register(req, res) {
+    console.log(req.body);
     const user = new this.#_user(req.body);
 
     user.save((err, info) => {

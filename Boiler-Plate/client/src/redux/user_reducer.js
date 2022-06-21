@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const userSlice = createSlice({
   name: 'user', // reducer 이름
@@ -9,7 +10,12 @@ const userSlice = createSlice({
       state.info = action.payload;
     },
     logout: (state) => {
-      state.info = null;
+      if (logoutProccess()) state.info = null;
+
+      async function logoutProccess() {
+        const response = await axios.get('/api/user/logout');
+        return response.data.success;
+      }
     },
   },
 });

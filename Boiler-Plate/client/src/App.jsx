@@ -6,6 +6,7 @@ import LoginPage from './components/views/LoginPage/LoginPage';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Footer from './components/views/Footer/Footer';
+import LoadingPage from './components/views/common/LoadingPage';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/logout" element={<LoadingPage type="logout" />} />
               <Route path="/register" element={<RegisterPage />} />
             </Routes>
           </div>

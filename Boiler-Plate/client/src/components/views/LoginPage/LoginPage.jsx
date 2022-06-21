@@ -80,8 +80,6 @@ function LoginPage() {
           gap-y-4
           text-2xl
       "
-        method="POST"
-        action="/api/user/login"
         onSubmit={formSubmitHandler}
       >
         <div>
