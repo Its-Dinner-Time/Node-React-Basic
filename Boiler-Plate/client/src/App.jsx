@@ -7,6 +7,8 @@ import LandingPage from './components/views/LandingPage/LandingPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import Footer from './components/views/Footer/Footer';
 import LoadingPage from './components/views/common/LoadingPage';
+import Auth from './hoc/auth';
+import Admin from './components/views/Admin/Admin';
 
 export default function App() {
   return (
@@ -26,10 +28,11 @@ export default function App() {
 
           <div className="grow flex justify-center items-center">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/" element={Auth(LandingPage, true)} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/logout" element={<LoadingPage type="logout" />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/register" element={Auth(RegisterPage, true)} />
+              <Route path="/admin" element={Auth(Admin, true, true)} />
             </Routes>
           </div>
 

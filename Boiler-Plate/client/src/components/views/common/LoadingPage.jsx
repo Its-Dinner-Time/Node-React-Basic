@@ -10,7 +10,7 @@ function LoadingPage(props) {
 
   const logoutProccess = () => {
     dispatch(logout());
-    navigate('/');
+    navigate('/login');
   };
 
   useEffect(() => {

@@ -57,12 +57,12 @@ export default class UserResponse {
 
   auth(req, res) {
     const { user } = req;
-    if (!user) return res.json(fail({ err: 'no user' }));
+    if (!user) return res.json({ isAuth: false, err: 'no user' });
 
     res.status(200).json({
       ...user.getInfo(),
       isAdmin: user.role !== 0,
-      authenticated: true,
+      isAuth: true,
     });
   }
 

@@ -16,7 +16,7 @@ function Navbar() {
     { path: '/', icon: IoHomeOutline },
     { path: !user ? '/login' : '/logout', icon: !user ? IoLogInOutline : IoLogOutOutline },
     { path: !user ? '/register' : null, icon: !user ? IoPersonAddOutline : null },
-    { path: '/setting', icon: IoSettingsOutline },
+    { path: '/admin', icon: IoSettingsOutline },
   ];
 
   const filtered = listItems.filter((item) => item.path);

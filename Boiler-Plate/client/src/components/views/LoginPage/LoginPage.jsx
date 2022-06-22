@@ -26,8 +26,8 @@ function LoginPage() {
     const { data, status } = response;
     if (status !== 200) return alert('fail');
 
-    const { authenticated, name } = data;
-    if (!authenticated) return alert(message);
+    const { isAuth, name, message } = data;
+    if (!isAuth) return alert(message);
 
     dispatch(login(data));
     alert(`${name}님 환영합니다.`);
