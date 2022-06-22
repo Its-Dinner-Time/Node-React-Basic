@@ -18,8 +18,8 @@ export default function App() {
           flex
           flex-col
           bg-slate-200 
-          w-screen 
-          h-screen 
+          max-w-screen 
+          min-h-screen 
           relative
         "
       >
@@ -28,7 +28,7 @@ export default function App() {
 
           <div className="grow flex justify-center items-center">
             <Routes>
-              <Route path="/" element={Auth(LandingPage, true)} />
+              <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/logout" element={<LoadingPage type="logout" />} />
               <Route path="/register" element={Auth(RegisterPage, true)} />
