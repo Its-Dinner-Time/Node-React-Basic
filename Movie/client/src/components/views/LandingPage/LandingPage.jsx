@@ -6,18 +6,25 @@ import GridCards from '../common/GridCards';
 
 function LandingPage() {
   const [movies, setMovies] = useState([]);
+  const [moviesPage, setMoviesPage] = useState(1);
   const [mainMovie, setMainMovie] = useState(null);
 
-  const fetchMovies = async () => {
-    const endPoint = `${MOVIE_API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+  const fetchMovies = async (page) => {
+    const endPoint = `${MOVIE_API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     const response = await axios.get(endPoint);
 
-    setMovies(response.data.results);
-    setMainMovie(response.data.results[0]);
+    setMovies([...movies, ...response.data.results]);
+    if (page === 1) setMainMovie(response.data.results[0]);
+  };
+
+  const loadMoreClickHandler = () => {
+    const nextPage = moviesPage + 1;
+    fetchMovies(nextPage);
+    setMoviesPage(nextPage);
   };
 
   useEffect(() => {
-    fetchMovies();
+    fetchMovies(moviesPage);
   }, []);
 
   return (
@@ -36,7 +43,10 @@ function LandingPage() {
         <GridCards list={movies} />
 
         <div className="flex justify-center mt-4">
-          <button className="rounded-full text-white bg-cyan-400 px-6 py-2 hover:scale-125 ease-in-out duration-300 active:bg-cyan-500">
+          <button
+            className="rounded-full text-white bg-cyan-400 px-6 py-2 hover:scale-125 ease-in-out duration-300 active:bg-cyan-500"
+            onClick={loadMoreClickHandler}
+          >
             load more
           </button>
         </div>
