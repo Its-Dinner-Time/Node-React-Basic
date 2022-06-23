@@ -9,9 +9,7 @@ function Footer() {
         bottom-0 
         left-0
         "
-      >
-        Footer
-      </div>
+      ></div>
     </>
   );
 }
