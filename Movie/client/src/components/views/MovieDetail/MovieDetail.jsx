@@ -1,12 +1,16 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { API_KEY, IMG_API_URL, MOVIE_API_URL } from '../../Config';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useState } from 'react';
+
+import { useParams } from 'react-router-dom';
+
+import axios from 'axios';
+
+import { API_KEY, IMG_API_URL, MOVIE_API_URL } from '../../Config';
 import MainImg from '../common/MainImg';
 import GridCards from '../common/GridCards';
 import MovieInfo from './Sections/MovieInfo';
+import LikeButton from './Sections/LikeButton';
 
 function MovieDetail() {
   const { movieId } = useParams();
@@ -56,10 +60,14 @@ function MovieDetail() {
           />
         )}
         <div className="xl:container md:container w-full h-full p-6">
-          <h1 className="text-3xl border-b border-slate-400 pb-6 mt-6">Movie Info</h1>
+          <h1 className="text-3xl border-b border-slate-400 pb-6 my-6">Movie Info</h1>
 
           {/* info */}
-          <section className="p-6">
+          <section className="p-6 pt-0">
+            <div className="w-full flex justify-end mb-6">
+              <LikeButton />
+            </div>
+
             <MovieInfo info={movieDetail} />
           </section>
 

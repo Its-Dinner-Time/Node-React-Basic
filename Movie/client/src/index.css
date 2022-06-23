@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  div.favorite-button {
+    cursor: pointer;
+    position: relative;
+    background: #fff;
+    border-radius: 1em;
+    padding: 0.5em;
+  }
+  div.favorite-button svg {
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.2s;
+    width: 1em;
+    height: 1em;
+    color: #aaa;
+  }
+
+  div.favorite-button svg:hover {
+    color: #666;
+  }
+
+  div.favorite-button svg:before {
+    font-style: normal;
+  }
+
+  div.favorite-button span.message {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    visibility: hidden;
+    transition: 0.6s;
+    z-index: -2;
+    font-size: 2px;
+    color: transparent;
+    font-weight: 400;
+  }
+
+  div.favorite-button svg.press {
+    color: #e23b3b;
+  }
+
+  div.favorite-button span.message.press {
+    bottom: 35px;
+    font-size: 14px;
+    visibility: visible;
+    animation: fade 1s;
+    z-index: 1;
+  }
+
+  @keyframes fade {
+    0% {
+      color: #transparent;
+    }
+    50% {
+      color: #e23b3b;
+    }
+    100% {
+      color: #transparent;
+    }
+  }
+}
