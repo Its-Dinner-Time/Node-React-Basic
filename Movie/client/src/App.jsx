@@ -9,6 +9,7 @@ import Footer from './components/views/Footer/Footer';
 import LoadingPage from './components/views/common/LoadingPage';
 import Auth from './hoc/auth';
 import Admin from './components/views/Admin/Admin';
+import MovieDetail from './components/views/MovieDetail/MovieDetail';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/logout" element={<LoadingPage type="logout" />} />
               <Route path="/register" element={Auth(RegisterPage, true)} />
               <Route path="/admin" element={Auth(Admin, true, true)} />
+              <Route path="/movie/:movieId" element={<MovieDetail />} />
             </Routes>
           </div>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MOVIE_API_URL, API_KEY, IMG_API_URL } from '../../Config';
 import axios from 'axios';
-import MainImg from './Sections/MainImg';
+import MainImg from '../common/MainImg';
 import GridCards from '../common/GridCards';
 
 function LandingPage() {
@@ -13,7 +13,14 @@ function LandingPage() {
     const endPoint = `${MOVIE_API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     const response = await axios.get(endPoint);
 
-    setMovies([...movies, ...response.data.results]);
+    const arr = response.data.results.map((item) => {
+      return {
+        ...item,
+        path: item.poster_path,
+        alt: item.original_title,
+      };
+    });
+    setMovies([...movies, ...arr]);
     if (page === 1) setMainMovie(response.data.results[0]);
   };
 
@@ -40,7 +47,7 @@ function LandingPage() {
 
         <h1 className="text-3xl border-b border-slate-400 pb-6 mt-6">Movies</h1>
 
-        <GridCards list={movies} />
+        <GridCards list={movies} isLinked={true} />
 
         <div className="flex justify-center mt-4">
           <button

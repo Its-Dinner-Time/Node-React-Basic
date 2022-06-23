@@ -3,7 +3,7 @@ import React from 'react';
 function MainImg(props) {
   return (
     <div
-      className="w-full h-[500px] xl:h-[800px] lg:h-[700px] md:h-[600px] relative"
+      className="w-full h-[400px] xl:h-[700px] lg:h-[600px] md:h-[500px] relative"
       style={{
         background: `url(${props.image})`,
         backgroundSize: 'cover',
