@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import MainImg from '../common/MainImg';
 import GridCards from '../common/GridCards';
+import MovieInfo from './Sections/MovieInfo';
 
 function MovieDetail() {
   const { movieId } = useParams();
@@ -58,6 +59,9 @@ function MovieDetail() {
           <h1 className="text-3xl border-b border-slate-400 pb-6 mt-6">Movie Info</h1>
 
           {/* info */}
+          <section className="p-6">
+            <MovieInfo info={movieDetail} />
+          </section>
 
           <div className="flex justify-center mt-4">
             <button
