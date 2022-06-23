@@ -65,7 +65,7 @@ function MovieDetail() {
           {/* info */}
           <section className="p-6 pt-0">
             <div className="w-full flex justify-end mb-6">
-              <LikeButton />
+              <LikeButton movieDetail={movieDetail} movieId={movieId} />
             </div>
 
             <MovieInfo info={movieDetail} />

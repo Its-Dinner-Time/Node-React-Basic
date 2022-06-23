@@ -11,20 +11,21 @@ export default function (SpecifiedComponent, option = null, adminRoute = null) {
 
     useEffect(() => {
       // 전부 통과
-      if (option === null) return;
-      if (option === true) proccess();
+      proccess();
 
       async function proccess() {
         const response = await dispatch(Auth());
 
         const { isAuth, isAdmin } = response.payload;
 
+        if (isAuth === true) await dispatch(login(response));
+
+        if (option === null) return;
+
         if (isAuth === false) {
           if (location.pathname === '/register') return;
           return navigate('/login');
         }
-
-        await dispatch(login(response));
 
         if (adminRoute === true) {
           if (isAdmin === false) return navigate('/');

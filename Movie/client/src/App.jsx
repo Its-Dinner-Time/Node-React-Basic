@@ -29,12 +29,12 @@ export default function App() {
 
           <div className="grow flex justify-center items-center">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              <Route path="/" element={Auth(LandingPage)} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/logout" element={<LoadingPage type="logout" />} />
               <Route path="/register" element={Auth(RegisterPage, true)} />
               <Route path="/admin" element={Auth(Admin, true, true)} />
-              <Route path="/movie/:movieId" element={<MovieDetail />} />
+              <Route path="/movie/:movieId" element={Auth(MovieDetail)} />
             </Routes>
           </div>
 
