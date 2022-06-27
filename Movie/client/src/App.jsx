@@ -34,7 +34,7 @@ export default function App() {
               <Route path="/logout" element={<LoadingPage type="logout" />} />
               <Route path="/register" element={Auth(RegisterPage, true)} />
               <Route path="/admin" element={Auth(Admin, true, true)} />
-              <Route path="/movie/:movieId" element={Auth(MovieDetail)} />
+              <Route path="/movie/:movieId" element={<MovieDetail />} />
             </Routes>
           </div>
 

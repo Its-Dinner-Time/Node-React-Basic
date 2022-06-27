@@ -1,4 +1,5 @@
 import UserRouter from '../Service/User/UserRouter.js';
+import FavoriteRouter from '../Service/Favorite/FavoriteRouter.js';
 
 const ROOT = '/api';
 export default function router(app) {
@@ -9,4 +10,7 @@ export default function router(app) {
 
   // user router
   UserRouter(ROOT, app);
+
+  // favorite router
+  FavoriteRouter(ROOT, app);
 }

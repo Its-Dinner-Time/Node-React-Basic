@@ -1,5 +1,5 @@
-import mongoose, { Schema } from 'mongoose';
-
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 // schema 정의
 const favoriteSchema = mongoose.Schema(
   {
@@ -13,7 +13,7 @@ const favoriteSchema = mongoose.Schema(
     movieTitle: {
       type: String,
     },
-    moviePost: {
+    moviePoster: {
       type: String,
     },
     movieRuntime: {

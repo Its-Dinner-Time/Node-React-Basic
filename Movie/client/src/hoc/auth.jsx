@@ -10,7 +10,6 @@ export default function (SpecifiedComponent, option = null, adminRoute = null) {
     const location = useLocation();
 
     useEffect(() => {
-      // 전부 통과
       proccess();
 
       async function proccess() {
