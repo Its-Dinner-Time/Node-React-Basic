@@ -10,6 +10,7 @@ import LoadingPage from './components/views/common/LoadingPage';
 import Auth from './hoc/auth';
 import Admin from './components/views/Admin/Admin';
 import MovieDetail from './components/views/MovieDetail/MovieDetail';
+import FavoritePage from './components/views/FavoritePage/FavoritePage';
 
 export default function App() {
   return (
@@ -34,7 +35,8 @@ export default function App() {
               <Route path="/logout" element={<LoadingPage type="logout" />} />
               <Route path="/register" element={Auth(RegisterPage, true)} />
               <Route path="/admin" element={Auth(Admin, true, true)} />
-              <Route path="/movie/:movieId" element={<MovieDetail />} />
+              <Route path="/movie/:movieId" element={Auth(MovieDetail)} />
+              <Route path="/favorite" element={Auth(FavoritePage, true)} />
             </Routes>
           </div>
 

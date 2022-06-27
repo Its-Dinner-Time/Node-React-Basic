@@ -1,9 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
 import { useParams } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { API_KEY, IMG_API_URL, MOVIE_API_URL } from '../../Config';
@@ -17,6 +16,8 @@ function MovieDetail() {
   const [movieDetail, setMovieDetail] = useState(null);
   const [movieCredits, setMovieCredits] = useState(null);
   const [showCredits, setShowCredits] = useState(false);
+
+  const user = useSelector((state) => state.user.info);
 
   const fetchMovie = async (credits = false) => {
     const endpoint = `${MOVIE_API_URL}movie/${movieId}${credits === true ? '/credits' : ''}?api_key=${API_KEY}`;
@@ -65,7 +66,7 @@ function MovieDetail() {
           {/* info */}
           <section className="p-6 pt-0">
             <div className="w-full flex justify-end mb-6">
-              <LikeButton movieDetail={movieDetail} movieId={movieId} />
+              <LikeButton movieDetail={movieDetail} movieId={movieId} user={user} />
             </div>
 
             <MovieInfo info={movieDetail} />

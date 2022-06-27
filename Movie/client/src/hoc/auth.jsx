@@ -11,27 +11,28 @@ export default function (SpecifiedComponent, option = null, adminRoute = null) {
 
     useEffect(() => {
       proccess();
-
-      async function proccess() {
-        const response = await dispatch(Auth());
-
-        const { isAuth, isAdmin } = response.payload;
-
-        if (isAuth === true) await dispatch(login(response));
-
-        if (option === null) return;
-
-        if (isAuth === false) {
-          if (location.pathname === '/register') return;
-          return navigate('/login');
-        }
-
-        if (adminRoute === true) {
-          if (isAdmin === false) return navigate('/');
-          return;
-        }
-      }
     }, []);
+
+    async function proccess() {
+      const response = await dispatch(Auth());
+
+      const { isAuth, isAdmin } = response.payload;
+
+      if (isAuth === true) await dispatch(login(response));
+
+      if (option === null) return;
+
+      if (isAuth === false) {
+        if (location.pathname === '/register') return;
+        return navigate('/login');
+      }
+
+      if (adminRoute === true) {
+        if (isAdmin === false) return navigate('/');
+        return;
+      }
+    }
+
     return <SpecifiedComponent />;
   }
 

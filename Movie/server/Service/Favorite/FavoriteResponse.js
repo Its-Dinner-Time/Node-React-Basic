@@ -8,7 +8,6 @@ export default class FavoriteResponse {
   }
 
   getCount(req, res) {
-    console.log('getCount');
     Favorite.find({ movieId: req.query.movieId }).exec((err, info) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, count: info.length });
@@ -16,10 +15,16 @@ export default class FavoriteResponse {
   }
 
   isLiked(req, res) {
-    console.log('isLiked');
     Favorite.find({ movieId: req.query.movieId, userFrom: req.query.userFrom }).exec((err, info) => {
       if (err) return res.status(400).send(err);
-      res.status(200).json({ success: true, isLiked: info.length !== 0 });
+      res.status(200).json({ success: true, isLiked: info.length !== 0, info: info });
+    });
+  }
+
+  likeList(req, res) {
+    Favorite.find({ userFrom: req.query.userFrom }).exec((err, info) => {
+      if (err) return res.status(400).send(err);
+      res.status(200).json({ success: true, data: info });
     });
   }
 }

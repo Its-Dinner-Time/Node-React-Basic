@@ -9,9 +9,6 @@ export default class FavoriteRequest {
   }
 
   like(req, res) {
-    console.log('like');
-    console.log(req.body);
-
     const favorite = new Favorite(req.body);
 
     favorite.save((err, info) => {
@@ -21,9 +18,6 @@ export default class FavoriteRequest {
   }
 
   unlike(req, res) {
-    console.log('unlike');
-    console.log(req.query);
-
     Favorite.deleteOne({ movieId: req.query.movieId, userFrom: req.query.userFrom })
       .then((info) => {
         res.status(200).json({ success: true, info });

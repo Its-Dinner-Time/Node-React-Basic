@@ -3,6 +3,9 @@ import FavoriteResponse from './FavoriteResponse.js';
 
 export default function (root, app) {
   const LIKE = `${root}/like`;
+  const LIKE_LIST = `${LIKE}/list`;
+  const IS_LIKE = `${LIKE}/bool`;
+
   const COUNT = `${LIKE}/count`;
 
   const request = new FavoriteRequest(app);
@@ -14,8 +17,13 @@ export default function (root, app) {
   });
 
   // 좋아요 확인
-  app.get(LIKE, (req, res) => {
+  app.get(IS_LIKE, (req, res) => {
     response.isLiked(req, res);
+  });
+
+  // 좋아요 리스트
+  app.get(LIKE_LIST, (req, res) => {
+    response.likeList(req, res);
   });
 
   // 좋아요 저장

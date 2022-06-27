@@ -3,17 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { makeQueryString } from '../../../../util/API-Util';
-import { Auth } from '../../../../redux/user_reducer';
-import { useDispatch } from 'react-redux';
 
 function LikeButton(props) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const userInfo = dispatch(Auth());
-
   const likeButton = useRef();
 
-  const { movieDetail, movieId } = props;
+  const { movieDetail, movieId, user } = props;
   const [count, setCount] = useState(0);
 
   const getLikeCounts = async () => {
@@ -29,13 +24,12 @@ function LikeButton(props) {
   };
 
   const isLiked = async () => {
-    const user = await userInfo;
     const query = {
       movieId: movieId,
-      userFrom: user.payload._id,
+      userFrom: user?.payload._id,
     };
 
-    const url = makeQueryString('/api/like', query);
+    const url = makeQueryString('/api/like/bool', query);
     const response = await axios.get(url);
 
     if (response.data.isLiked) {
@@ -47,10 +41,9 @@ function LikeButton(props) {
   };
 
   const addLike = async () => {
-    const user = await userInfo;
     const body = {
       movieId: movieId,
-      userFrom: user.payload._id,
+      userFrom: user?.payload._id,
       movieTitle: movieDetail.title,
       moviePoster: movieDetail.backdrop_path,
       movieRuntime: movieDetail.runtime,
@@ -61,10 +54,9 @@ function LikeButton(props) {
   };
 
   const unLike = async () => {
-    const user = await userInfo;
     const query = {
       movieId: movieId,
-      userFrom: user.payload._id,
+      userFrom: user?.payload._id,
     };
 
     const url = makeQueryString('/api/like', query);
@@ -73,8 +65,7 @@ function LikeButton(props) {
   };
 
   const likeButtonClickHandler = async (e) => {
-    const user = await userInfo;
-    if (user.payload.isAuth === false) return navigate('/login');
+    if (!user?.payload.isAuth) return navigate('/login');
     const button = e.target.closest('.favorite-button');
     const [svg, message] = button.children;
     svg.classList.toggle('press');
@@ -92,8 +83,7 @@ function LikeButton(props) {
     proccess();
 
     async function proccess() {
-      const user = await userInfo;
-      if (user.payload.isAuth === false) return;
+      if (!user?.payload.isAuth) return;
       await isLiked();
     }
   }, []);
