@@ -26,7 +26,6 @@ function LikeButton(props) {
     const likeCounts = response.data.count;
 
     setCount(likeCounts);
-    await isLiked();
   };
 
   const isLiked = async () => {
@@ -75,21 +74,28 @@ function LikeButton(props) {
 
   const likeButtonClickHandler = async (e) => {
     const user = await userInfo;
+    if (user.payload.isAuth === false) return navigate('/login');
     const button = e.target.closest('.favorite-button');
     const [svg, message] = button.children;
     svg.classList.toggle('press');
     message.classList.toggle('press');
 
     if (svg.classList.contains('press')) {
-      if (!user) return navigate('/login');
       return await addLike();
     }
 
-    await unLike();
+    return await unLike();
   };
 
   useEffect(() => {
     getLikeCounts();
+    proccess();
+
+    async function proccess() {
+      const user = await userInfo;
+      if (user.payload.isAuth === false) return;
+      await isLiked();
+    }
   }, []);
 
   return (
